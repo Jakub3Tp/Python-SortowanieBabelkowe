@@ -23,11 +23,23 @@ def choice_sort(numbers: list) -> list:
                 pmin = numbers[i]
         numbers[j], numbers[j + 1] = pmin, numbers[j]
 
+def insertion_sort(numbers: list) -> list:
+    for j in range(len(numbers) - 2, -1, -1):
+        x = numbers[j]
+        i = j + 1
+        while i < len(numbers) and x > numbers[i]:
+            numbers[i - 1] = numbers[i]
+            i = i + 1
+        numbers[i - 1] = x
+
 if __name__ == '__main__':
     numbers1 = rand_number(10)
     bubble_sort(numbers1)
     numbers2 = rand_number(10)
     choice_sort(numbers2)
+    numbers3 = rand_number(10)
+    insertion_sort(numbers3)
     show(numbers1)
     show(numbers2)
+    show(numbers3)
 
