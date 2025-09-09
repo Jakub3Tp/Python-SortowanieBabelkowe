@@ -1,3 +1,4 @@
+import math
 import random
 
 
@@ -32,14 +33,59 @@ def insertion_sort(numbers: list) -> list:
             i = i + 1
         numbers[i - 1] = x
 
+def fusion(d: list, i_p, i_s, i_k):
+    i_1 = i_p
+    i_2 = i_s
+    p = [0 for _ in range(len(d))]
+
+    for i in range(i_p, i_k + 1):
+        if (i_1 == i_s) or (i_2 >= i_k and d[i_1] > d[i_2]):
+            p[i] = d[i_2]
+            i_2 += 1
+        else:
+            p[i] = d[i_1]
+            i_1 += 1
+
+    for i in range(i_p, i_k + 1):
+        d[i] = p[i]
+
+def fusion_sort(d: list, i_p, i_k):
+    i_s = (i_p + i_k - 1) // 2
+    if i_s - i_p > 0:
+        fusion_sort(d, i_p, i_s - 1)
+    if i_k - i_s > 0:
+        fusion_sort(d, i_s, i_k)
+    fusion(d, i_p, i_s, i_k)
+
+    return d
+
+def searchingBinary(table: list[int], numbers: int) -> int:
+    left, right = 0, len(table) - 1
+    searcing_index = 0
+    while left <= right:
+        searcing_index = math.floor((left + right) / 2)
+        if table[searcing_index] < numbers:
+            left = searcing_index + 1
+        elif table[searcing_index] > numbers:
+            right = searcing_index - 1
+        else:
+            return searcing_index
+
+    return None
+
 if __name__ == '__main__':
-    numbers1 = rand_number(10)
-    bubble_sort(numbers1)
-    numbers2 = rand_number(10)
-    choice_sort(numbers2)
-    numbers3 = rand_number(10)
-    insertion_sort(numbers3)
-    show(numbers1)
-    show(numbers2)
-    show(numbers3)
+    #numbers1 = rand_number(10)
+    #bubble_sort(numbers1)
+    #numbers2 = rand_number(10)
+    #choice_sort(numbers2)
+    #numbers3 = rand_number(10)
+    #insertion_sort(numbers3)
+    #numbers4 = rand_number(10)
+    #fusion_sort(numbers4, 0, 1)
+    #show(numbers1)
+    #show(numbers2)
+    #show(numbers3)
+    list = [3, 4, 6, 5, 1, 10]
+    searchingBinary(list, 7)
+    show(list)
 
