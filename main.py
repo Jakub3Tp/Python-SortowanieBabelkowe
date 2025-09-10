@@ -73,6 +73,29 @@ def searchingBinary(table: list[int], numbers: int) -> int:
 
     return None
 
+def totalRoot(x: int) -> int:
+    a = 0
+    r1 = 1
+    r2 = 2
+    i = 0
+    while a < x:
+        a = a + r1
+        r1 = r1 + r2
+        i = i + 1
+    return i - 1
+
+def totalRoot2(x: int) -> int:
+    if x > 1:
+        p1 = 0
+        p2 = x >> 1
+        while abs(p1 - p2) > 1:
+            p1 = p2
+            p2 = (p2 + x // p1) >> 1
+    else:
+        p2 = x
+        while (p2 * p2) > x:
+            p2 = p2 - 1
+    return p2
 if __name__ == '__main__':
     #numbers1 = rand_number(10)
     #bubble_sort(numbers1)
@@ -85,7 +108,11 @@ if __name__ == '__main__':
     #show(numbers1)
     #show(numbers2)
     #show(numbers3)
-    list = [3, 4, 6, 5, 1, 10]
-    searchingBinary(list, 7)
-    show(list)
+    #list = [3, 4, 6, 5, 1, 10]
+    #searchingBinary(list, 7)
+    #show(list)
+    #print(totalRoot(51))
+    #print(math.sqrt(51))
 
+    print(totalRoot2(51))
+    print(math.sqrt(51))
